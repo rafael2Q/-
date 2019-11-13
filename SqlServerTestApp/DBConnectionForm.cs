@@ -16,12 +16,6 @@ namespace SqlServerTestApp
         public DBConnectionForm()
         {
             InitializeComponent();
-            DataTable dataTable = SqlDataSourceEnumerator.Instance.GetDataSources();
-            foreach(var table in dataTable.AsEnumerable())
-            {
-                Console.WriteLine(table.ToString());
-            }
-            //serverBox.Items.AddRange();
 
         }
 
@@ -38,19 +32,15 @@ namespace SqlServerTestApp
                 return;
             }
             SqlConnection connection = GetDBConnection(datasource, database, username, userpass);
-
-            try
+            
+            if(DBConnectionService.IsSqlConnectionWorks(connection))
             {
-                connection.Open();
                 MessageBox.Show("Connection passed!", "Connection passed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                connection.Dispose();
+                MessageBox.Show("Ошибка!", "Connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -58,7 +48,7 @@ namespace SqlServerTestApp
         {
             string connString = @"Data Source=" + datasource + ";Initial Catalog="
                         + database + ";Persist Security Info=True;User ID=" + username + ";Password=" + password;
-            SqlConnection conn = new SqlConnection(connString);
+            SqlConnection conn = DBConnectionService.GetSqlConnection(connString);
             return conn;
         }
     }

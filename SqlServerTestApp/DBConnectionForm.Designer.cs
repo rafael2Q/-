@@ -36,7 +36,7 @@
             this.usernameBox = new System.Windows.Forms.TextBox();
             this.userpassBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
-            this.serverBox = new System.Windows.Forms.ComboBox();
+            this.serverBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -109,21 +109,20 @@
             // 
             // serverBox
             // 
-            this.serverBox.FormattingEnabled = true;
             this.serverBox.Location = new System.Drawing.Point(145, 45);
             this.serverBox.Name = "serverBox";
-            this.serverBox.Size = new System.Drawing.Size(186, 21);
-            this.serverBox.TabIndex = 6;
+            this.serverBox.Size = new System.Drawing.Size(186, 20);
+            this.serverBox.TabIndex = 1;
             // 
             // DBConnectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 260);
-            this.Controls.Add(this.serverBox);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.userpassBox);
             this.Controls.Add(this.usernameBox);
+            this.Controls.Add(this.serverBox);
             this.Controls.Add(this.dbNameBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -147,6 +146,6 @@
         private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.TextBox userpassBox;
         private System.Windows.Forms.Button connectButton;
-        private System.Windows.Forms.ComboBox serverBox;
+        private System.Windows.Forms.TextBox serverBox;
     }
 }
