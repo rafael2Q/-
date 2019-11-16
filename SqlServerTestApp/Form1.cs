@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,22 @@ namespace SqlServerTestApp
         private void button1_Click(object sender, EventArgs e)
         {
             new DBConnectionForm().Show();
+        }
+
+      
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form3 frm3 = new Form3();
+          
+            frm3.Show();
+            this.Hide();
         }
     }
 }
