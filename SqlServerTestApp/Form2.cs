@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using static SqlServerTestApp.Form4;
 
 namespace SqlServerTestApp
 {
@@ -26,12 +26,9 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source = .\\SQLEXPRESS; Initial Catalog = Васильчугов Практика; Persist Security Info=True; User ID = nekekos; Password = 123;");
-            con.Open();
-            SqlCommand com = new SqlCommand($@"INSERT INTO [dbo].[Театр]
-           ([Название театра],[Город],[Репертуар],[Стоимость билетов],[Стоимость билетов на премьеры])VALUES('{textBox1.Text}','{textBox2.Text}','{textBox3.Text}','{textBox4.Text}','{textBox5.Text}')", con);
-            int d = com.ExecuteNonQuery();
-            con.Close();
+            string query= $@"INSERT INTO [dbo].[Театр]
+           ([Название театра],[Город],[Репертуар],[Стоимость билетов],[Стоимость билетов на премьеры])VALUES({((IdentityItem)comboBox1.SelectedItem)?.Id},{((IdentityItem)comboBox2.SelectedItem)?.Id},{((IdentityItem)comboBox3.SelectedItem)?.Id},'{textBox4.Text}','{textBox5.Text}')";
+            int? d = DBConnectionService.SendCommandToSqlServer(query);
             MessageBox.Show("добавлено" + d + "строк");
         }
         //название теара
@@ -64,6 +61,32 @@ namespace SqlServerTestApp
         {
 
         }
+
+        private void comboBox1_DropDown(object sender, EventArgs e)
+        {
+            string query = "select [Название театра],[Название театра] from [Театр]";
+            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(list);
+        }
+
+        private void comboBox2_DropDown(object sender, EventArgs e)
+        {
+            string query = "select [Город],[Город] from [Театр]";
+            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+            comboBox2.Items.Clear();
+            comboBox2.Items.AddRange(list);
+        }
+
+        private void comboBox3_DropDown(object sender, EventArgs e)
+        {
+            string query = "select [Репертуар],[Репертуар] from [Театр]";
+            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+            comboBox3.Items.Clear();
+            comboBox3.Items.AddRange(list);
+        }
+
+        
     }
 }
 

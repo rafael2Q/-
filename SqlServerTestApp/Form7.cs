@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using static SqlServerTestApp.Form4;
 
 namespace SqlServerTestApp
 {
@@ -32,13 +32,12 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source = .\\SQLEXPRESS; Initial Catalog = Васильчугов Практика; Persist Security Info=True; User ID = nekekos; Password = 123;");
-            con.Open();
-            SqlCommand com = new SqlCommand($@"INSERT INTO [dbo].[Спектакли]
-           ([Год постановки],[Бюджет],[Название спектакля])VALUES('{dateTimePicker1.Value}','{textBox2.Text}','{textBox3.Text}')", con);
-            int d = com.ExecuteNonQuery();
-            con.Close();
+            
+            string query=$@"INSERT INTO [dbo].[Спектакли]
+           ([Год постановки],[Бюджет],[Название спектакля])VALUES('{dateTimePicker1.Value}','{textBox2.Text}','{textBox1.Text}')";
+            int? d = DBConnectionService.SendCommandToSqlServer(query);
             MessageBox.Show("добавлено" + d + "строк");
+           
             }
            
         //название театра
@@ -57,12 +56,15 @@ namespace SqlServerTestApp
 
         }
         //название спектакля
-        private void textBox3_TextChanged(object sender, EventArgs e)
+       
+
+        private void Form7_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void Form7_Load(object sender, EventArgs e)
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using static SqlServerTestApp.Form4;
 
 namespace SqlServerTestApp
 {
@@ -15,11 +16,6 @@ namespace SqlServerTestApp
         public Form5()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,18 +28,17 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source = .\\SQLEXPRESS; Initial Catalog = Васильчугов Практика; Persist Security Info=True; User ID = nekekos; Password = 123;");
-            con.Open();
-            SqlCommand com = new SqlCommand($@"INSERT INTO [dbo].[Занятость актёров в спектакле]
-           ([Роль]
-           ,[Стоимость годового контракта])
+            string query = $@"INSERT INTO [dbo].[Занятость актёров в спектакле]
+           ([id актёра],[Роль],[Стоимость годового контракта])
         VALUES
-           ('{textBox3.Text}'
-           ,'{textBox4.Text}')", con);
-            int d = com.ExecuteNonQuery();
-            con.Close();
+           ({((IdentityItem)comboBox1.SelectedItem)?.Id},'{textBox3.Text}','{textBox4.Text}')";
+
+            int? d = DBConnectionService.SendCommandToSqlServer(query);
+
             MessageBox.Show("добавлено" + d + "строк");
         }
+        
+            
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
@@ -54,5 +49,32 @@ namespace SqlServerTestApp
         {
 
         }
+
+       
+
+        private void comboBox1_DropDown(object sender, EventArgs e)
+        {
+            string query = "select [id],[id] from [Актёры]";
+             var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(items: list);
+
+        }
+
+        private void Form5_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void comboBox2_DropDown(object sender, EventArgs e)
+        {
+            string query = "select [id спектакля],[id спектакля] from [Занятость актёров в спектакле]";
+            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+            comboBox2.Items.Clear();
+            comboBox2.Items.AddRange(items: list);
+        }
+
+     
     }
 }

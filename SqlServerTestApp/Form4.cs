@@ -28,19 +28,9 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-           // SqlConnection con = new SqlConnection("Data Source = .\\SQLEXPRESS; Initial Catalog = Васильчугов Практика; Persist Security Info=True; User ID = nekekos; Password = 123;");
-           // con.Open();
-           // SqlCommand com = new SqlCommand($@"INSERT INTO [dbo].[Расписание спектаклей]
-           //([Стоимость билета],[Стоимость билета на премьеру],[День недели],[Дата начала спектакля],[Дата окончания спектакля])VALUES('{textBox1.Text}','{textBox2.Text}','{textBox4.Text}','{dateTimePicker1.Value}','{dateTimePicker2.Value}')", con);
-           // int d = com.ExecuteNonQuery();
-           // con.Close();
-           if (string.IsNullOrEmpty(textBox1.Text))
-            {
-                MessageBox.Show("ошибка");
-                return;
-            }
+         
             string query = $@"INSERT INTO [dbo].[Расписание спектаклей]
-           ([id спектакля],[id театра],[Стоимость билета],[Стоимость билета на премьеру],[День недели],[Дата начала спектакля],[Дата окончания спектакля])VALUES({((IdentityItem)comboBox1.SelectedItem)?.Id},{((IdentityItem)comboBox2.SelectedItem)?.Id},'{textBox1.Text}','{textBox2.Text}','{textBox4.Text}','{dateTimePicker1.Value}','{dateTimePicker2.Value}')";
+           ([Стоимость билета],[Стоимость билета на премьеру],[День недели],[Дата начала спектакля],[Дата окончания спектакля],[Название театра])VALUES('{textBox1.Text}','{textBox2.Text}','{textBox4.Text}','{dateTimePicker1.Value}','{dateTimePicker2.Value}',{((IdentityItem)comboBox2.SelectedItem)?.Id})";
             int? d = DBConnectionService.SendCommandToSqlServer(query);
             MessageBox.Show("добавлено" + d + "строк");
 
@@ -86,17 +76,11 @@ namespace SqlServerTestApp
                 return Name;
             }
         }
-        private void comboBox1_DropDown(object sender, EventArgs e)
-        {
-            string query = "select [id спектакля],[id театра] from [Расписание спектаклей]";
-            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
-            comboBox1.Items.Clear();
-            comboBox1.Items.AddRange(list);
-        }
+    
 
         private void comboBox2_DropDown(object sender, EventArgs e)
         {
-            string query = "select [id театра],[Название театра] from [Театр]";
+            string query = "select [Название театра],[Название театра] from [Театр]";
             var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
             comboBox2.Items.Clear();
             comboBox2.Items.AddRange(list);
@@ -111,6 +95,11 @@ namespace SqlServerTestApp
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
         {
 
         }
