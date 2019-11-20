@@ -39,7 +39,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(161, 69);
+            this.textBox3.Location = new System.Drawing.Point(209, 69);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(151, 20);
             this.textBox3.TabIndex = 2;
@@ -57,11 +57,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 76);
+            this.label2.Location = new System.Drawing.Point(30, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 13);
+            this.label2.Size = new System.Drawing.Size(168, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Дополнительная плата";
+            this.label2.Text = "Дополнительная плата за стаж";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button1
@@ -76,7 +76,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(209, 105);
+            this.button2.Location = new System.Drawing.Point(257, 105);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(103, 35);
             this.button2.TabIndex = 6;
@@ -96,7 +96,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(161, 41);
+            this.textBox1.Location = new System.Drawing.Point(209, 31);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(151, 20);
             this.textBox1.TabIndex = 9;

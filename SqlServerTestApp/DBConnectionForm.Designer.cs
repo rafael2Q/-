@@ -120,6 +120,7 @@
             this.serverBox.Size = new System.Drawing.Size(186, 20);
             this.serverBox.TabIndex = 1;
             this.serverBox.Text = "204-6\\SQLEXPRESS";
+            this.serverBox.TextChanged += new System.EventHandler(this.serverBox_TextChanged);
             // 
             // label5
             // 

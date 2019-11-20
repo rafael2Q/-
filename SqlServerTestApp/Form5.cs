@@ -29,16 +29,16 @@ namespace SqlServerTestApp
         private void button2_Click(object sender, EventArgs e)
         {
             string query = $@"INSERT INTO [dbo].[Занятость актёров в спектакле]
-           ([id актёра],[Роль],[Стоимость годового контракта])
+           ([id спектакля],[id актёра],[Роль],[Стоимость годового контракта])
         VALUES
-           ({((IdentityItem)comboBox1.SelectedItem)?.Id},'{textBox3.Text}','{textBox4.Text}')";
+           ({((IdentityItem)comboBox1.SelectedItem)?.Id},{((IdentityItem)comboBox2.SelectedItem)?.Id},'{textBox3.Text}','{textBox4.Text}')";
 
             int? d = DBConnectionService.SendCommandToSqlServer(query);
 
             MessageBox.Show("добавлено" + d + "строк");
         }
-        
-            
+
+
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
@@ -50,12 +50,12 @@ namespace SqlServerTestApp
 
         }
 
-       
+
 
         private void comboBox1_DropDown(object sender, EventArgs e)
         {
             string query = "select [id],[id] from [Актёры]";
-             var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(items: list);
 
@@ -75,6 +75,6 @@ namespace SqlServerTestApp
             comboBox2.Items.AddRange(items: list);
         }
 
-     
+
     }
 }

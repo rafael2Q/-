@@ -63,6 +63,11 @@ namespace SqlServerTestApp
         {
 
         }
+
+        private void serverBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
