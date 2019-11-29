@@ -26,67 +26,58 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string query= $@"INSERT INTO [dbo].[Театр]
-           ([Название театра],[Город],[Репертуар],[Стоимость билетов],[Стоимость билетов на премьеры])VALUES({((IdentityItem)comboBox1.SelectedItem)?.Id},{((IdentityItem)comboBox2.SelectedItem)?.Id},{((IdentityItem)comboBox3.SelectedItem)?.Id},'{textBox4.Text}','{textBox5.Text}')";
+            string query= $@"INSERT INTO [dbo].[Салон]
+           ([Название],[Кол-во машин],[Адрес])VALUES('{textBox3.Text}','{textBox2.Text}','{textBox1.Text}')";
             int? d = DBConnectionService.SendCommandToSqlServer(query);
             MessageBox.Show("добавлено" + d + "строк");
         }
-        //название теара
+        
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
-        //город
+        
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
-        //репертуар
+        
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }
-        //стоимость билетов
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        //стоимость билетов на премьеру
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        //название спектакля
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_DropDown(object sender, EventArgs e)
-        {
-            string query = "select [Название театра],[Название театра] from [Театр]";
-            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
-            comboBox1.Items.Clear();
-            comboBox1.Items.AddRange(list);
-        }
-
-        private void comboBox2_DropDown(object sender, EventArgs e)
-        {
-            string query = "select [Город],[Город] from [Театр]";
-            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
-            comboBox2.Items.Clear();
-            comboBox2.Items.AddRange(list);
-        }
-
-        private void comboBox3_DropDown(object sender, EventArgs e)
-        {
-            string query = "select [Репертуар],[Репертуар] from [Театр]";
-            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
-            comboBox3.Items.Clear();
-            comboBox3.Items.AddRange(list);
-        }
+      
+      
 
         
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char l = e.KeyChar;
+            if ((l < 'А' || l > 'я') && l != '\b' && l != '.')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
 

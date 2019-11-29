@@ -68,6 +68,11 @@ namespace SqlServerTestApp
         {
 
         }
+
+        private void DBConnectionForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -46,8 +46,8 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string query = $@"INSERT INTO [dbo].[Стаж]
-           ([Стаж],[Дополнительная плата за стаж])
+            string query = $@"INSERT INTO [dbo].[Производители]
+           ([Производитель],[Марка автомобиля])
      VALUES('{textBox1.Text}','{textBox3.Text}')";
             int? d = DBConnectionService.SendCommandToSqlServer(query);
             MessageBox.Show("добавлено" + d + "строк");
@@ -64,6 +64,20 @@ namespace SqlServerTestApp
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form8_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char l = e.KeyChar;
+            if ((l < 'А' || l > 'я') && l != '\b' && l != '.')
+            {
+                e.Handled = true;
+            }
         }
     }
     }

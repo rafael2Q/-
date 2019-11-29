@@ -28,9 +28,8 @@ namespace SqlServerTestApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-         
-            string query = $@"INSERT INTO [dbo].[Расписание спектаклей]
-           ([Стоимость билета],[Стоимость билета на премьеру],[День недели],[Дата начала спектакля],[Дата окончания спектакля],[Название театра])VALUES('{textBox1.Text}','{textBox2.Text}','{textBox4.Text}','{dateTimePicker1.Value}','{dateTimePicker2.Value}',{((IdentityItem)comboBox2.SelectedItem)?.Id})";
+            string query = $@"INSERT INTO [dbo].[Покупка]
+           ([ID_Товар],[доставка],[вид оплаты],[дата])VALUES('{((IdentityItem)comboBox1.SelectedItem)?.Name}','{textBox1.Text}','{textBox2.Text}','{dateTimePicker1.Value}')";
             int? d = DBConnectionService.SendCommandToSqlServer(query);
             MessageBox.Show("добавлено" + d + "строк");
 
@@ -46,10 +45,7 @@ namespace SqlServerTestApp
 
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+     
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
@@ -60,33 +56,20 @@ namespace SqlServerTestApp
         {
 
         }
-        public class IdentityItem
+
+        private void comboBox1_DropDown(object sender, EventArgs e)
         {
-            public string Id { get; set; }
-            public string Name { get; set; }
-
-            public IdentityItem(string id, string name)
             {
-                Id = id;
-                Name = name;
-            }
-
-            public override string ToString()
-            {
-                return Name;
+                string query = "select [ID_Товар],[ID_Товар] from [Покупка]";
+                var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
+                comboBox1.Items.Clear();
+                comboBox1.Items.AddRange(items: list);
             }
         }
-    
 
-        private void comboBox2_DropDown(object sender, EventArgs e)
+        private void Form4_Load(object sender, EventArgs e)
         {
-            string query = "select [Название театра],[Название театра] from [Театр]";
-            var list = DBConnectionService.SendQueryToSqlServer(query)?.Select(row => new IdentityItem(row[0], row[1])).ToArray();
-            comboBox2.Items.Clear();
-            comboBox2.Items.AddRange(list);
 
-
-           
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,14 +77,37 @@ namespace SqlServerTestApp
 
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
         {
 
         }
 
-        private void label8_Click(object sender, EventArgs e)
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char l = e.KeyChar;
+            if ((l < 'А' || l > 'я') && l != '\b' && l != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
     }
 }
+  
+    
+
+        
+
+        
+
+      

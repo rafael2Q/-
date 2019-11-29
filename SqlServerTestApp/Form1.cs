@@ -59,5 +59,21 @@ namespace SqlServerTestApp
             this.Close();
 
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Form10 frm10 = new Form10();
+
+            frm10.Show();
+            this.Hide();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Form18 frm18 = new Form18();
+
+            frm18.Show();
+            this.Hide();
+        }
     }
 }
